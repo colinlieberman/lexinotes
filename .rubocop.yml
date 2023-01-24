@@ -1,0 +1,59 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - Capfile
+    - Rakefile
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'bin/**/*'
+    - 'spec/rails_helper.rb'
+    - 'spec/spec_helper.rb'
+
+Layout/LineLength:
+  Enabled: false
+  Max: 120
+  Exclude:
+    - lib/tasks/*
+    - spec/**/*
+
+Naming/VariableNumber:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/ClassLength:
+  Enabled: false
+  CountAsOne: ['array', 'heredoc', 'hash']
+
+Metrics/BlockLength:
+  Exclude:
+    - lib/tasks/*
+    - spec/**/*
+    - app/admin/**/*
+  CountAsOne: ['array', 'heredoc', 'hash']
+
+Metrics/MethodLength:
+  Exclude:
+    - lib/tasks/*
+    - spec/**/*
+  CountAsOne: ['array', 'heredoc', 'hash']
+
+Metrics/AbcSize:
+  CountRepeatedAttributes: false
+  Exclude:
+    - lib/tasks/*
+    - spec/**/*
+
+Style/Documentation:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/NegatedIf:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
