@@ -11,7 +11,7 @@
 /db/*.sqlite3
 /db/*.sqlite3-*
 
-config/database.yml
+/config/database.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -33,6 +33,8 @@ config/database.yml
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+/coverage/*
 
 /public/packs
 /public/packs-test
