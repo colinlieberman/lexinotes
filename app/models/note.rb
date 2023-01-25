@@ -8,4 +8,7 @@ class Note < ApplicationRecord
   has_many :citations, through: :note_citations, inverse_of: :notes
 
   validates :study_date, presence: true
+
+  validates :notebook_number, numericality: { only_integer: true }
+  validates :notebook_page, numericality: { only_integer: true }
 end
