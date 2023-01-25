@@ -11,7 +11,9 @@ class AuthenticatedController < ApplicationController
 
   def session_timestamp_valid?
     return false unless session[:good_until]
+    return false unless DateTime.now.to_i < session[:good_until]
 
-    DateTime.now.to_i < session[:good_until]
+    session[:good_until] += 3600
+    true
   end
 end

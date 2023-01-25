@@ -1,0 +1,6 @@
+%header
+  - if flash.any?
+    #flash
+      - flash.each do |type, message|
+        %div{class: "#{type} hoverbox"}
+          = message
