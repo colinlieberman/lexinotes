@@ -11,4 +11,8 @@ class Note < ApplicationRecord
 
   validates :notebook_number, numericality: { only_integer: true }
   validates :notebook_page, numericality: { only_integer: true }
+
+  validates :active, presence: true
+
+  scope :active, -> { where("notes.active" => true) }
 end

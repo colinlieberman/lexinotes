@@ -1,0 +1,7 @@
+.login.hoverbox
+  %p
+    Password Time!
+  %form{action: :post}
+    -# TODO: this should fail without csrf token
+    %input{type: :password, name: :password}
+    %input{type: :submit, value: "OK"}
