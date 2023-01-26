@@ -15,4 +15,12 @@ class Note < ApplicationRecord
   validates :active, presence: true
 
   scope :active, -> { where("notes.active" => true) }
+
+  def citations_str
+    # TODO: this
+  end
+
+  def tags_str
+    # TODO: this
+  end
 end

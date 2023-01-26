@@ -1,0 +1,60 @@
+%h2 Your Notes
+
+.add-note
+  %i.fa.fa-plus-circle
+  Add a note
+
+%table#notes
+  %thead
+    %tr
+      %th Class Date
+      %th Citations
+      %th Note
+      %th Tags
+      %th Notebook vol.
+      %th Notebook page
+  %tbody
+    - @notes.each do |note|
+      = render('notes/note', { note: note })
+
+- if @notes.empty?
+  %h3 You have no notes
+
+.add-note
+  %i.fa.fa-plus-circle
+  Add a note
+
+#note-modal.hidden.modal
+  .lightbox
+  .modal-content.hoverbox
+    %h3 New note...
+    %form{action: notes_path, method: :post}
+      %label.required
+        Class Date
+        %input{type: :date, class: :datepicker, name: :study_date}
+      %label
+        Book
+        %input{type: :input, name: 'citation["book"]'}
+      %label
+        Chapter
+        %input{type: :number, name: 'citation["chapter"]'}
+      %label
+        Verse
+        %input{type: :number, name: 'citation["verse"]'}
+      %label.required
+        Note
+        %textarea
+      %label Tags
+      #model-tags
+        .add-tag
+          %i.fa.fa-plus-circle
+          Add Tag
+      %label
+        Notebook Volume
+        %input{type: :number, name: :notebook_volume}
+      %label
+        Notebook Page
+        %input{type: :number, name: :notebook_page}
+      .buttons
+        %button.cancel Cancel
+        %input{type: :submit, value: 'Create Note'}
