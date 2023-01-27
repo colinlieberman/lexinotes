@@ -1,4 +1,12 @@
-const Notes = {
+window.Notes = {
+  updateNotes: function(jqXHR, statusText, formData) {
+    if(statusText == 'error') {
+      // todo: handle errors
+      return;
+    }
+    console.log(jqXHR.responseJSON);
+  },
+
   initAddNoteButtons: function() {
     const that = this;
     this.addNoteButtons.on('click', function() {
@@ -7,6 +15,7 @@ const Notes = {
   },
 
   initNoteModal: function() {
+    // TODO: require all book/chapter/verse if any set
     const that = this;
     this.modalCancelButton.on('click', function(e) {
       e.preventDefault();

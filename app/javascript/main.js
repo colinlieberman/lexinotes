@@ -24,16 +24,50 @@ const LexiNotes = {
         val = '';
       }
 
-      val.replace(/[^0-9.]/g, '');
-      $this.data('value', val)
+      val?.replace(/[^0-9.]/g, '');
+      $this.data('value', val);
 
       $this.val(val);
+    });
+  },
+
+  initXHRforms: function(){
+    const forms = $('form.xhr');
+    forms.each(function() {
+      const $this = $(this);
+      const action = $this.attr('action') || '/';
+      const method = $this.attr('method') || 'get';
+      const objName = $this.data('object');
+      const methodName = $this.data('method');
+      const $that = $this;
+      $this.on('submit', function(e) {
+        e.preventDefault();
+        const formData = $that.serializeArray();
+
+        let queryString = '';
+        formData.forEach(function(arg) {
+          queryString += `${arg['name']}=${arg['value']}&`
+        });
+
+        $.ajax({
+          method: method,
+          url: action,
+          data: queryString,
+          headers: {
+            Accept: 'application/json'
+          },
+          complete: function(jqXHR, statusText) {
+            window[objName][methodName](jqXHR, statusText, formData);
+          }
+        });
+      });
     });
   },
 
   init: function() {
     this.initRequired();
     this.initNumericInputs();
+    this.initXHRforms();
   }
 };
 

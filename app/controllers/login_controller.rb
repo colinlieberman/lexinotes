@@ -30,6 +30,10 @@ class LoginController < ApplicationController
   end
 
   def set_session
+    # make sure flash is clear before doing the redirect
+    flash.alert = ''
+    flash.notice = ''
+
     now = DateTime.now.to_i
     session[:good_until] = now + 3600
   end

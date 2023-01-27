@@ -28,22 +28,22 @@
   .lightbox
   .modal-content.hoverbox
     %h3 New note...
-    %form{action: notes_path, method: :post}
+    %form.xhr{action: notes_path, method: :post, data: {object: 'Notes', method: 'updateNotes'}}
       %label.required
         Class Date
         %input{type: :date, class: :datepicker, name: :study_date}
       %label
         Book
-        %input{type: :input, name: 'citation["book"]'}
+        %input{type: :input, name: 'citation[book]'}
       %label
         Chapter
-        %input{type: :number, name: 'citation["chapter"]'}
+        %input{type: :number, name: 'citation[chapter]'}
       %label
         Verse
-        %input{type: :number, name: 'citation["verse"]'}
+        %input{type: :number, name: 'citation[verse]'}
       %label.required
         Note
-        %textarea
+        %textarea{name: :content}
       %label Tags
       #model-tags
         .add-tag
@@ -51,7 +51,7 @@
           Add Tag
       %label
         Notebook Volume
-        %input{type: :number, name: :notebook_volume}
+        %input{type: :number, name: :notebook_number}
       %label
         Notebook Page
         %input{type: :number, name: :notebook_page}

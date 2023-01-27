@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_25_002748) do
+ActiveRecord::Schema.define(version: 2023_01_27_003251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2023_01_25_002748) do
     t.text "comments"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["book", "chapter", "verse"], name: "index_citations_on_book_and_chapter_and_verse", unique: true
+    t.index ["book", "chapter", "verse"], name: "index_citations_on_book_and_chapter_and_verse"
     t.index ["book", "chapter"], name: "index_citations_on_book_and_chapter"
   end
 

@@ -17,10 +17,22 @@ class Note < ApplicationRecord
   scope :active, -> { where("notes.active" => true) }
 
   def citations_str
-    # TODO: this
+    citations.map { |c| "#{c.book} #{c.chapter}:#{c.verse}" }.uniq.join(",")
   end
 
   def tags_str
-    # TODO: this
+    tags.map(&:name).join(",")
+  end
+
+  def study_date_str
+    study_date.strftime("%b %d %Y")
+  end
+
+  def to_json(arg = nil)
+    json = JSON.parse(super(arg))
+    json["study_date"] = study_date_str
+    json["tags"] = tags_str
+    json["citations"] = citations_str
+    JSON.generate(json)
   end
 end
