@@ -15,12 +15,16 @@ class NotesController < AuthenticatedController
                  note.citations.push(citation_from_params)
                  note
                else
-                 note.errors[:messages]
+                 note.errors.messages
                end
 
     respond_to do |format|
       format.json { render json: response.to_json }
-      format.html { render :index } # reload the index if this wasn't an xhr
+      format.html do
+        # reload the index if this wasn't an xhr
+        @notes = Note.active
+        render :index
+      end
     end
   end
 
