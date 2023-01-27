@@ -6,17 +6,7 @@ class NotesController < AuthenticatedController
   end
 
   def create
-    note = Note.new(study_date: params[:study_date],
-                    content: params[:content],
-                    notebook_number: params[:notebook_number],
-                    notebook_page: params[:notebook_page])
-
-    response = if note.save
-                 note.citations.push(citation_from_params)
-                 note
-               else
-                 note.errors.messages
-               end
+    response = create_response
 
     respond_to do |format|
       format.json { render json: response.to_json }
@@ -29,6 +19,24 @@ class NotesController < AuthenticatedController
   end
 
   private
+
+  def create_response
+    note = Note.new(study_date: params[:study_date], content: params[:content])
+
+    update_props(note)
+
+    if note.save
+      note.citations.push(citation_from_params)
+      note
+    else
+      note.errors.messages
+    end
+  end
+
+  def update_props(note)
+    note.update(notebook_number: params[:notebook_number]) if params[:notebook_number].present?
+    note.update(notebook_page: params[:notebook_page]) if params[:notebook_page].present?
+  end
 
   def citation_from_params
     return unless params[:citation]

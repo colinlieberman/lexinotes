@@ -9,12 +9,12 @@ class Note < ApplicationRecord
 
   validates :study_date, presence: true
 
-  validates :notebook_number, numericality: { only_integer: true }
-  validates :notebook_page, numericality: { only_integer: true }
+  validates :notebook_number, numericality: { only_integer: true }, allow_nil: true
+  validates :notebook_page, numericality: { only_integer: true }, allow_nil: true
 
   validates :active, presence: true
 
-  scope :active, -> { where("notes.active" => true) }
+  scope :active, -> { where("notes.active" => true).order("created_at DESC") }
 
   def citations_str
     citations.map { |c| "#{c.book} #{c.chapter}:#{c.verse}" }.uniq.join(",")
